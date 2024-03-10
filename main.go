@@ -18,6 +18,9 @@ const defaultConfigFile = "./.uselocal.yaml"
 // dropFlag specifies that the replace directives should be dropped, instead of added.
 var dropFlag = flag.Bool("drop", false, "drops the replace directives specified in the configuration file")
 
+// filepath to read the configuration from.
+var configPath = flag.String("file", defaultConfigFile, "specifies the path to the configuration file")
+
 // Config specifies the configuration for uselocal.
 type Config struct {
 	// Targets specifies a list of target sub-folders where go.mod files
@@ -82,6 +85,9 @@ func main() {
 	file := defaultConfigFile
 	if v, ok := os.LookupEnv("USELOCAL"); ok {
 		file = v
+	}
+	if configPath != nil {
+		file = *configPath
 	}
 	cfg, err := NewConfig(file)
 	if err != nil {

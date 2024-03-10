@@ -1,4 +1,4 @@
-module github.com/gbbr/uselocal
+module github.com/dineshg13/uselocal
 
 go 1.20
 
